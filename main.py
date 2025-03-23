@@ -1,19 +1,34 @@
-def josephus(n, k):
-    last_person = 0  # Начальное значение для круга из 1 человека
-    for i in range(2, n + 1):
-        last_person = (last_person + k) % i
-    return last_person + 1  # Приводим к 1-индексации
+def count_points_in_quadrants(points):
+
+    q1 = q2 = q3 = q4 = 0
+
+    for x, y in points:
+        if x > 0 and y > 0:
+            q1 += 1
+        if x < 0 and y > 0:
+            q2 += 1
+        if x < 0 and y < 0:
+            q3 += 1
+        if x > 0 and y < 0:
+            q4 += 1
+
+    return q1, q2, q3, q4
 
 def main():
-    # Ввод данных
     n = int(input())
-    k = int(input())
+    points = []
 
-    # Вычисление номера последнего оставшегося человека
-    last_person = josephus(n, k)
+    for _ in range(n):
+        x, y = map(int, input().split())
+        points.append((x, y))
 
-    # Вывод результата
-    print(last_person)
+    q1, q2, q3, q4 = count_points_in_quadrants(points)
+
+    print("Первая четверть:", q1)
+    print("Вторая четверть:", q2)
+    print("Третья четверть:", q3)
+    print("Четвертая четверть:", q4)
 
 if __name__ == "__main__":
     main()
+
